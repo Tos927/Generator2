@@ -58,3 +58,32 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+*.log
+Generator/Logs/shadercompiler-AssetImportWorker0.log
+Generator/Logs/shadercompiler-UnityShaderCompiler.exe0.log
+Generator/Logs/shadercompiler-UnityShaderCompiler.exe1.log
+Generator/Logs/shadercompiler-UnityShaderCompiler.exe2.log
+Generator/Logs/shadercompiler-UnityShaderCompiler.exe3.log
+Generator/Logs/shadercompiler-UnityShaderCompiler.exe4.log
+Generator/Logs/shadercompiler-UnityShaderCompiler.exe5.log
+Generator/Logs/shadercompiler-UnityShaderCompiler.exe6.log
+Generator/Logs/shadercompiler-UnityShaderCompiler.exe7.log
+Generator/Logs/shadercompiler-AssetImportWorker0.log
+Generator/Logs/shadercompiler-UnityShaderCompiler.exe0.log
+Generator/Logs/shadercompiler-UnityShaderCompiler.exe1.log
+Generator/Logs/shadercompiler-UnityShaderCompiler.exe2.log
+Generator/Logs/shadercompiler-UnityShaderCompiler.exe3.log
+Generator/Logs/shadercompiler-UnityShaderCompiler.exe4.log
+Generator/Logs/shadercompiler-UnityShaderCompiler.exe5.log
+Generator/Logs/shadercompiler-UnityShaderCompiler.exe6.log
+Generator/Logs/shadercompiler-UnityShaderCompiler.exe7.log
+Generator/Logs/AssetImportWorker0.log
+Generator/Logs/shadercompiler-AssetImportWorker0.log
+Generator/Logs/shadercompiler-UnityShaderCompiler.exe0.log
+Generator/Logs/shadercompiler-UnityShaderCompiler.exe1.log
+Generator/Logs/shadercompiler-UnityShaderCompiler.exe2.log
+Generator/Logs/shadercompiler-UnityShaderCompiler.exe3.log
+Generator/Logs/shadercompiler-UnityShaderCompiler.exe4.log
+Generator/Logs/shadercompiler-UnityShaderCompiler.exe5.log
+Generator/Logs/shadercompiler-UnityShaderCompiler.exe6.log
+Generator/Logs/shadercompiler-UnityShaderCompiler.exe7.log
