@@ -10,5 +10,13 @@ namespace ExoProjetGénérateur.Data
 		protected int criticalChance;
 		protected int criticalDamage;
 		protected Range range;
+
+		public Offensive(int _attackPoint, int _criticalChance, int _criticalDamage, Range _range)
+        {
+			this.attackPoint = _attackPoint;
+			this.criticalChance = _criticalChance;
+			this.criticalDamage = _criticalDamage;
+			this.range = _range;
+        }
 	}
 }

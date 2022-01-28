@@ -11,5 +11,14 @@ namespace ExoProjetGénérateur.Data
 		protected int damageBlock;
 		protected int levelRequiered;
 		EquipementType equipementType;
+
+		public Equipments (string _name, Stats _stats, int _damageBlock, int _levelRequiered, EquipementType _equipementType)
+        {
+			this.name = _name;
+			this.stats = _stats;
+			this.damageBlock = _damageBlock;
+			this.levelRequiered = _levelRequiered;
+			this.equipementType = _equipementType;
+        }
 	}
 }
