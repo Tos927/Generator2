@@ -13,4 +13,9 @@ namespace ExoProjetGénérateur.Data
 		Armor,
 		Claymore
 	}
+
+	public enum EquimentName
+    {
+		//trouver des jolies noms
+    }
 }

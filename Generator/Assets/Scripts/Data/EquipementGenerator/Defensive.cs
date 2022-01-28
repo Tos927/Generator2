@@ -9,8 +9,14 @@ namespace ExoProjetGénérateur.Data
 		protected int physicalArmor;
 		protected int magicalArmor;
 
-		public Defensive(int _physicalArmor, int _magicalArmor)
+		public Defensive(string _name, Stats _stats, int _damageBlock, int _levelRequiered, EquipementType _equipementType, int _physicalArmor, int _magicalArmor)
         {
+			this.name = _name;
+			this.stats = _stats;
+			this.damageBlock = _damageBlock;
+			this.levelRequiered = _levelRequiered;
+			this.equipementType = _equipementType;
+
 			this.physicalArmor = _physicalArmor;
 			this.magicalArmor = _magicalArmor;
         }
