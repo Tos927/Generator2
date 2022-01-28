@@ -6,8 +6,8 @@ namespace ExoProjetGénérateur.Data
 {
 	public class Defensive : Equipments
 	{
-		protected int physicalArmor;
-		protected int magicalArmor;
+		public int physicalArmor;
+		public int magicalArmor;
 
 		public Defensive(string _name, Stats _stats, int _damageBlock, int _levelRequiered, EquipementType _equipementType, int _physicalArmor, int _magicalArmor)
         {

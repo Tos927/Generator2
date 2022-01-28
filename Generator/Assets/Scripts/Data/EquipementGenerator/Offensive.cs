@@ -6,15 +6,10 @@ namespace ExoProjetGénérateur.Data
 {
 	public class Offensive : Equipments
 	{
-		protected int attackPoint;
-		protected int criticalChance;
-		protected int criticalDamage;
-		protected Range range;
-
-		/*public int attackPointGet
-        {
-            get { return attackPoint; }
-        }*/
+		public int attackPoint;
+		public int criticalChance;
+		public int criticalDamage;
+		public Range range;
 
 		public Offensive(string _name, Stats _stats, int _damageBlock, int _levelRequiered, EquipementType _equipementType, int _attackPoint, int _criticalChance, int _criticalDamage, Range _range)
         {
