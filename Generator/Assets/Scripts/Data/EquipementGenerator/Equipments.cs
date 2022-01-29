@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using UnityEngine.UI;
+using UnityEngine;
 
 namespace ExoProjetGénérateur.Data
 {
@@ -10,6 +12,8 @@ namespace ExoProjetGénérateur.Data
 		protected Stats stats;
 		protected int damageBlock;
 		protected int levelRequiered;
-		protected EquipementType equipementType;
+		public EquipementType equipementType;
+
+		public Sprite sprite;
 	}
 }

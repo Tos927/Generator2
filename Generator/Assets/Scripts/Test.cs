@@ -12,7 +12,19 @@ public class Test : MonoBehaviour
 
     public List<Equipments> equipmentsList = new List<Equipments>();
 
+    public List<Sprite> equipmentSprite = new List<Sprite>();
+
+    public Dictionary<string, Sprite> Skin = new Dictionary<string, Sprite>();
+
     //public int attackPointGet { get; }
+
+    private void Start()
+    {
+        foreach (var sprite in equipmentSprite)
+        {
+            Skin.Add(sprite.name, sprite);
+        }
+    }
 
     public void GenerateEquipment()
     {
@@ -71,17 +83,17 @@ public class Test : MonoBehaviour
             }
             int rdmOfDef = Random.Range(0, 2);
 
+
+
             switch (rdmOfDef)  
             {
                 case 0:
                     Equipments testOf = new Offensive("Jérôme", new Stats(1, 1, 1, 1, 1, 1, 1, 1, 1), 1, 1, typeTestOf, 1, 1, 1, rangeTest);
                     equipmentsList.Add(testOf);
-                    //Debug.Log("tours" + i);
                     break;
                 case 1:
                     Equipments testDef = new Defensive("Franck'O", new Stats(1, 1, 1, 1, 1, 1, 1, 1, 1), 1, 1, typeTestDef, 1, 1);
                     equipmentsList.Add(testDef);
-                    //Debug.Log("tours" + i);
                     break;
                 default:
                     break;
@@ -89,24 +101,43 @@ public class Test : MonoBehaviour
 
         }
 
-        /*foreach (var equipments in equipmentsList)
+
+        foreach (var equipments in equipmentsList)
         {
             if (equipments is Offensive o)
             {
-                Debug.Log(o.name);
-                //Debug.Log(o.attackPoint);
-                //Debug.Log(o.criticalChance);
-                //Debug.Log(o.criticalDamage);
-                //Debug.Log(o.range);
-                Debug.Log(typeTestOf);
+                switch (o.equipementType)
+                {
+                    case EquipementType.Sword:
+                        o.sprite = Skin[EquipementType.Sword.ToString()];
+                        break;
+                    case EquipementType.Bow:
+                        o.sprite = Skin[EquipementType.Bow.ToString()];
+                        break;
+                    case EquipementType.MagicStaff:
+                        o.sprite = Skin[EquipementType.MagicStaff.ToString()];
+                        break;
+                    default:
+                        break;
+                }
             }
             else if (equipments is Defensive d)
             {
-                Debug.Log(d.name);
-                //Debug.Log(d.magicalArmor);
-                //Debug.Log(d.physicalArmor);
-                Debug.Log(typeTestDef);
+                switch (d.equipementType)
+                {
+                    case EquipementType.Shield:
+                        d.sprite = Skin[EquipementType.Shield.ToString()];
+                        break;
+                    case EquipementType.Armor:
+                        d.sprite = Skin[EquipementType.Armor.ToString()];
+                        break;
+                    case EquipementType.Claymore:
+                        d.sprite = Skin[EquipementType.Claymore.ToString()];
+                        break;
+                    default:
+                        break;
+                }
             }
-        }*/
+        }
     }
 }
