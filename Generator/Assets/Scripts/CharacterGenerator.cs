@@ -9,6 +9,7 @@ public class CharacterGenerator : MonoBehaviour
     public Image image;
 
     public Text text;
+    public Text statsText;
 
     public List<Characters> characterList = new List<Characters>();
 
@@ -18,13 +19,13 @@ public class CharacterGenerator : MonoBehaviour
 
     void Start()
     {
-        foreach (var item in charaSprite)
+        foreach (var sprite in charaSprite)
         {
-            Skin.Add(item.name, item);
+            Skin.Add(sprite.name, sprite);
         }
 
-        Characters char1 = new Heroes(HeroClass.Paladin, "Uter", new Stats(1, 2, 3, 4, 5, 6, 7, 8, 9), 
-            RandomInt(0,1000), RandomInt(0, 1000), RandomInt(0, 100));
+        Characters char1 = new Heroes(HeroClass.Paladin, "Uther The Great Paladin", Util.Instance.SetRandomStats(1, 99),
+            Random.Range(0,1000)/*Armor*/, Random.Range(0, 1000)/*Mana*/, Random.Range(0, 100)/*Level*/);
 
         characterList.Add(char1);
 
@@ -54,39 +55,46 @@ public class CharacterGenerator : MonoBehaviour
                 image.sprite = h.sprite;
 
                 text.text = h.name;
+
+                statsText.text = GetDisplayStatsFromChara(h);
+
             }
         }
-
-        
     }
 
     public void Generate3Character()
     {
-
-    }
-
-    public int RandomInt(int min, int max)
-    {
-        int randomInt = Random.Range(min, max);
-
-        return randomInt;
-    }
-
-    public Stats Salut()
-    {
-        Stats statsRandom = new Stats();
-
-/*        int newStats = 0;
-
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 3; i++)
         {
-            newStats = Random.Range(1, 99);
 
-            statsRandom.vitality = newStats;
-        }*/
-
-        return statsRandom;
+        }
     }
+
+    public string GetDisplayStatsFromChara(Heroes h)
+    {
+        string stats =
+
+            "Level : " + h.level + "\n" +
+            "HP : " + h.life + "\n" +
+            "Mana : " + h.mana + "\n" +
+            "Stamina : " + h.stamina + "\n" + "\n" +
+
+            "Vitality : " + h.stats.vitality + "\n" +
+            "Memory : " + h.stats.memory + "\n" +
+            "Stamina : " + h.stats.stamina + "\n" +
+            "Strength : " + h.stats.strength + "\n" +
+            "Dexterity : " + h.stats.dexterity + "\n" +
+            "Agility : " + h.stats.agility + "\n" +
+            "Intellect : " + h.stats.intellect + "\n" +
+            "Faith : " + h.stats.faith + "\n" +
+            "Luck : " + h.stats.luck + "\n";
+
+        return stats;
+    }
+
+    
+
+    
 
     // Update is called once per frame
     void Update()
