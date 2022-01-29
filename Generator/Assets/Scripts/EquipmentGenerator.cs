@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using ExoProjetGénérateur.Data;
+using System.Reflection;
 
 public class EquipmentGenerator : MonoBehaviour
 {
@@ -98,13 +99,13 @@ public class EquipmentGenerator : MonoBehaviour
 
             if (rdmEquipmentType == 0 || rdmEquipmentType == 1 || rdmEquipmentType == 2 )
             {
-                Equipments newEquipment = new Offensive(equipmentAdj[rdmEquipmentAdj], Util.Instance.SetRandomStats(0, 10, 3), damageBlock, levelNeaded,
+                Equipments newEquipment = new Offensive(equipmentAdj[rdmEquipmentAdj], Util.Instance.SetRandomStats(1, 10, 3), damageBlock, levelNeaded,
                     equipementType, attackPoint, /*CriticalChance*/Random.Range(100, 600), /*CriticalDamage*/Random.Range(100, 600), equipmentRange);
                 equipmentsList.Add(newEquipment);
             }
             else if (rdmEquipmentType == 3 || rdmEquipmentType == 4 || rdmEquipmentType == 5)
             {
-                Equipments newEquipment = new Defensive(equipmentAdj[rdmEquipmentAdj], Util.Instance.SetRandomStats(0, 10, 3),
+                Equipments newEquipment = new Defensive(equipmentAdj[rdmEquipmentAdj], Util.Instance.SetRandomStats(1, 10, 3),
                     damageBlock, levelNeaded, equipementType, /*Magicalarmor*/Random.Range(100, 600),/*Physicalarmor*/ Random.Range(100, 600));
                 equipmentsList.Add(newEquipment);
             }
@@ -156,33 +157,40 @@ public class EquipmentGenerator : MonoBehaviour
         string stats =
 
             "Level Required : " + e.levelRequiered + "\n" +
-            "Damage Blocked : " + e.damageBlock + "\n" +
+            "Damage Blocked : " + e.damageBlock + "\n\n";
 
-            "Vitality : " + e.stats.vitality + "\n" +
-            "Memory : " + e.stats.memory + "\n" +
-            "Stamina : " + e.stats.stamina + "\n" +
-            "Strength : " + e.stats.strength + "\n" +
-            "Dexterity : " + e.stats.dexterity + "\n" +
-            "Agility : " + e.stats.agility + "\n" +
-            "Intellect : " + e.stats.intellect + "\n" +
-            "Faith : " + e.stats.faith + "\n" +
-            "Luck : " + e.stats.luck + "\n";
         
+
         if (e is Offensive o)
         {
             stats += 
                 "Attack Point : " + o.attackPoint + "\n" +
                 "Criticale Damage : " + o.criticalDamage + "\n" +
-                "Criticale Chance : " + o.criticalChance + "\n";
+                "Criticale Chance : " + o.criticalChance + "\n\n";
         }
         else if (e is Defensive d)
         {
             stats +=
                 "Physical Armor : " + d.physicalArmor + "\n" +
-                "Magical Armor : " + d.magicalArmor + "\n";
+                "Magical Armor : " + d.magicalArmor + "\n\n";
+        }
+
+        foreach (var field in typeof(Stats).GetFields(BindingFlags.Instance |
+                                                 BindingFlags.NonPublic |
+                                                 BindingFlags.Public))
+        {
+            object t = field.GetValue(e.stats);
+            switch (t)
+            {
+                case 0:
+                    break;
+                default:
+                    stats +=
+                        field.Name + " : " + t + "\n";
+                    break;
+            }
         }
 
         return stats;
     }
-
 }
