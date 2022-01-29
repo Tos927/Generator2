@@ -16,7 +16,8 @@ public class Test : MonoBehaviour
 
     public Dictionary<string, Sprite> Skin = new Dictionary<string, Sprite>();
 
-    //public int attackPointGet { get; }
+
+    private int damageBlock; //en pourcentage
 
     private void Start()
     {
@@ -28,7 +29,7 @@ public class Test : MonoBehaviour
 
     public void GenerateEquipment()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 1; i++)
         {
             int rdmRange = Random.Range(0, 3);
 
@@ -47,18 +48,23 @@ public class Test : MonoBehaviour
                     break;
             }
 
-            int rdmEquipmentTypeOf = Random.Range(0, 3);
+            int rdmEquipmentTypeOf = Random.Range(0, 3); 
+            int levelRequiered = Random.Range(1, 100);
+            int attackPoint = levelRequiered * 10;
 
             switch (rdmEquipmentTypeOf)
             {
                 case 0:
                     typeTestOf = EquipementType.Sword;
+                    damageBlock = Random.Range(10, 70);
                     break;
                 case 1:
                     typeTestOf = EquipementType.Bow;
+                    damageBlock = Random.Range(1, 20);
                     break;
                 case 2:
                     typeTestOf = EquipementType.MagicStaff;
+                    damageBlock = Random.Range(1, 30);
                     break;
                 default:
                     break;
@@ -71,28 +77,30 @@ public class Test : MonoBehaviour
             {
                 case 3:
                     typeTestDef = EquipementType.Shield;
+                    damageBlock = Random.Range(30, 100);
                     break;
                 case 4:
                     typeTestDef = EquipementType.Armor;
+                    damageBlock = Random.Range(5, 30);
                     break;
                 case 5:
                     typeTestDef = EquipementType.Claymore;
+                    damageBlock = 0;
                     break;
                 default:
                     break;
             }
             int rdmOfDef = Random.Range(0, 2);
-
-
+            
 
             switch (rdmOfDef)  
             {
                 case 0:
-                    Equipments testOf = new Offensive("Jérôme", new Stats(1, 1, 1, 1, 1, 1, 1, 1, 1), 1, 1, typeTestOf, 1, 1, 1, rangeTest);
+                    Equipments testOf = new Offensive("Jérôme", new Stats(1, 1, 1, 1, 1, 1, 1, 1, 1), damageBlock, levelRequiered, typeTestOf, attackPoint, /*CriticalChance*/Random.Range(100, 600), /*CriticalDamage*/Random.Range(100, 600), rangeTest);
                     equipmentsList.Add(testOf);
                     break;
                 case 1:
-                    Equipments testDef = new Defensive("Franck'O", new Stats(1, 1, 1, 1, 1, 1, 1, 1, 1), 1, 1, typeTestDef, 1, 1);
+                    Equipments testDef = new Defensive("Franck'O", new Stats(1, 1, 1, 1, 1, 1, 1, 1, 1), damageBlock, levelRequiered, typeTestDef, /*Magicalarmor*/Random.Range(100, 600),/*Physicalarmor*/ Random.Range(100, 600));
                     equipmentsList.Add(testDef);
                     break;
                 default:
@@ -100,7 +108,6 @@ public class Test : MonoBehaviour
             }
 
         }
-
 
         foreach (var equipments in equipmentsList)
         {
