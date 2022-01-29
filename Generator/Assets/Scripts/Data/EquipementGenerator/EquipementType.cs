@@ -14,8 +14,18 @@ namespace ExoProjetGénérateur.Data
 		Claymore
 	}
 
-	public enum EquimentName
+	public enum EquipmentName
     {
-		//trouver des jolies noms
+		Holy,
+		Titanic,
+		Marvelous,
+		Forcefull,
+		Mythril,
+		Obsidian,
+		Diamond,
+		Demonic,
+		God_s,
+		Hercules_s, 
+		Lucifer_s, 
     }
 }

@@ -6,9 +6,10 @@ using ExoProjetGénérateur.Data;
 
 public class Test : MonoBehaviour
 {
-    public Range rangeTest;
-    public EquipementType typeTestOf;
-    public EquipementType typeTestDef;
+    private Range rangeTest;
+    private EquipementType typeTestOf;
+    private EquipementType typeTestDef;
+    private EquipmentName equipmentName;
 
     public List<Equipments> equipmentsList = new List<Equipments>();
 
@@ -31,28 +32,31 @@ public class Test : MonoBehaviour
     {
         for (int i = 0; i < 1; i++)
         {
-            int rdmRange = Random.Range(0, 3);
-
-            switch (rdmRange)
-            {
-                case 0:
-                    rangeTest = Range.Short;
-                    break;
-                case 1:
-                    rangeTest = Range.Medium;
-                    break;
-                case 2:
-                    rangeTest = Range.Long;
-                    break;
-                default:
-                    break;
-            }
-
-            int rdmEquipmentTypeOf = Random.Range(0, 3); 
+            int rdmEquipmentType = Random.Range(0, 6);
+            int rdmEquipmentName = Random.Range(0, 11);
             int levelRequiered = Random.Range(1, 100);
             int attackPoint = levelRequiered * 10;
 
-            switch (rdmEquipmentTypeOf)
+            if (rdmEquipmentType < 3)
+            {
+                int rdmRange = Random.Range(0, 3);
+                switch (rdmRange)
+                {
+                    case 0:
+                        rangeTest = Range.Short;
+                        break;
+                    case 1:
+                        rangeTest = Range.Medium;
+                        break;
+                    case 2:
+                        rangeTest = Range.Long;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            switch (rdmEquipmentType)
             {
                 case 0:
                     typeTestOf = EquipementType.Sword;
@@ -66,15 +70,6 @@ public class Test : MonoBehaviour
                     typeTestOf = EquipementType.MagicStaff;
                     damageBlock = Random.Range(1, 30);
                     break;
-                default:
-                    break;
-            }
-
-
-            int rdmEquipmentTypeDef = Random.Range(3, 6);
-
-            switch (rdmEquipmentTypeDef)
-            {
                 case 3:
                     typeTestDef = EquipementType.Shield;
                     damageBlock = Random.Range(30, 100);
@@ -90,17 +85,56 @@ public class Test : MonoBehaviour
                 default:
                     break;
             }
+
+            switch (rdmEquipmentName)
+            {
+                case 0:
+                    equipmentName = EquipmentName.Holy;
+                    break;
+                case 1:
+                    equipmentName = EquipmentName.Titanic;
+                    break;
+                case 2:
+                    equipmentName = EquipmentName.Marvelous;
+                    break;
+                case 3:
+                    equipmentName = EquipmentName.Forcefull;
+                    break;
+                case 4:
+                    equipmentName = EquipmentName.Mythril;
+                    break;
+                case 5:
+                    equipmentName = EquipmentName.Obsidian;
+                    break;
+                case 6:
+                    equipmentName = EquipmentName.Diamond;
+                    break;
+                case 7:
+                    equipmentName = EquipmentName.Demonic;
+                    break;
+                case 8:
+                    equipmentName = EquipmentName.God_s;
+                    break;
+                case 9:
+                    equipmentName = EquipmentName.Hercules_s;
+                    break;
+                case 10:
+                    equipmentName = EquipmentName.Lucifer_s;
+                    break;
+                default:
+                    break;
+            }
             int rdmOfDef = Random.Range(0, 2);
             
 
-            switch (rdmOfDef)  
+            switch (rdmOfDef)
             {
                 case 0:
-                    Equipments testOf = new Offensive("Jérôme", new Stats(1, 1, 1, 1, 1, 1, 1, 1, 1), damageBlock, levelRequiered, typeTestOf, attackPoint, /*CriticalChance*/Random.Range(100, 600), /*CriticalDamage*/Random.Range(100, 600), rangeTest);
+                    Equipments testOf = new Offensive(equipmentName.ToString(), Util.Instance.SetRandomStats(0, 10), damageBlock, levelRequiered, typeTestOf, attackPoint, /*CriticalChance*/Random.Range(100, 600), /*CriticalDamage*/Random.Range(100, 600), rangeTest);
                     equipmentsList.Add(testOf);
                     break;
                 case 1:
-                    Equipments testDef = new Defensive("Franck'O", new Stats(1, 1, 1, 1, 1, 1, 1, 1, 1), damageBlock, levelRequiered, typeTestDef, /*Magicalarmor*/Random.Range(100, 600),/*Physicalarmor*/ Random.Range(100, 600));
+                    Equipments testDef = new Defensive(equipmentName.ToString(), Util.Instance.SetRandomStats(0, 10), damageBlock, levelRequiered, typeTestDef, /*Magicalarmor*/Random.Range(100, 600),/*Physicalarmor*/ Random.Range(100, 600));
                     equipmentsList.Add(testDef);
                     break;
                 default:
