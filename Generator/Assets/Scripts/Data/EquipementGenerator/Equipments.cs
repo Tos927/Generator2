@@ -6,14 +6,14 @@ using UnityEngine;
 
 namespace ExoProjetGénérateur.Data
 {
+	[Serializable]
 	public class Equipments
 	{
 		public string name;
-		protected Stats stats;
-		protected int damageBlock;
-		protected int levelRequiered;
+		public Stats stats;
+		public int damageBlock;
+		public int levelRequiered;
 		public EquipementType equipementType;
-
 		public Sprite sprite;
 	}
 }

@@ -4,17 +4,18 @@ using System.Text;
 
 namespace ExoProjetGénérateur.Data
 {
+    [Serializable]
     public struct Stats
     {
-        private int vitality;
-        private int memory;
-        private int stamina;
-        private int strength;
-        private int dexterity;
-        private int agility;
-        private int intellect;
-        private int faith;
-        private int luck;
+        public int vitality;
+        public int memory;
+        public int stamina;
+        public int strength;
+        public int dexterity;
+        public int agility;
+        public int intellect;
+        public int faith;
+        public int luck;
 
         public Stats(int _vitality, int _memory, int _stamina, int _strength,
             int _dexterity, int _agility, int _intellect, int _faith, int _luck)

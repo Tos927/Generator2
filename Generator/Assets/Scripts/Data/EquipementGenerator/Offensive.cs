@@ -4,6 +4,7 @@ using System.Text;
 
 namespace ExoProjetGénérateur.Data
 {
+	[Serializable]
 	public class Offensive : Equipments
 	{
 		public int attackPoint;
@@ -11,7 +12,8 @@ namespace ExoProjetGénérateur.Data
 		public int criticalDamage;
 		public Range range;
 
-		public Offensive(string _name, Stats _stats, int _damageBlock, int _levelRequiered, EquipementType _equipementType, int _attackPoint, int _criticalChance, int _criticalDamage, Range _range)
+		public Offensive(string _name, Stats _stats, int _damageBlock, int _levelRequiered, EquipementType _equipementType, int _attackPoint, int _criticalChance,
+			int _criticalDamage, Range _range)
         {
 			this.name = _name;
 			this.stats = _stats;
