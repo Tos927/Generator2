@@ -21,19 +21,6 @@ namespace ExoProjetGénérateur.Data
 			this.stamina = stats.stamina * 100;
 			this.mana = (stats.intellect * 80) + (stats.memory * 20);
 			this.level = _level;
-
-            /*switch (_characterClass)
-            {
-                case HeroClass.Paladin:
-					héroClass = "Paladin";
-                    break;
-                case HeroClass.Thief:
-                    break;
-                case HeroClass.Archer:
-                    break;
-                default:
-                    break;
-            }*/
         }
 	}
 }

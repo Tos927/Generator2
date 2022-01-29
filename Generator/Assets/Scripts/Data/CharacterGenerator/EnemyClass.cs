@@ -9,6 +9,6 @@ namespace ExoProjetGénérateur.Data
 	{
 		Troll,
 		Goblin,
-		Skeleton
+		Lich
 	}
 }
