@@ -7,6 +7,9 @@ using System.Reflection;
 
 public class EquipmentGenerator : MonoBehaviour
 {
+    //Fenetre inventaire
+    public GameObject inventoryWindow;
+
     private Range equipmentRange;
     private EquipementType equipementType;
 
@@ -41,7 +44,7 @@ public class EquipmentGenerator : MonoBehaviour
 
     public void GenerateEquipment()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 1; i++)
         {
             int rdmEquipmentType = Random.Range(0, 6);
             int rdmEquipmentAdj = Random.Range(0, 11);
@@ -192,5 +195,20 @@ public class EquipmentGenerator : MonoBehaviour
         }
 
         return stats;
+    }
+
+    public void OpenInventory()
+    {
+        inventoryWindow.SetActive(true);
+    }
+
+    public void CloseInventory()
+    {
+        inventoryWindow.SetActive(false);
+    }
+
+    public void InventoryEquipement()
+    {
+        Debug.Log("Vous avez choisi un equipement");
     }
 }
