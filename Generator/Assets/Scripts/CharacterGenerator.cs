@@ -6,9 +6,7 @@ using ExoProjetGénérateur.Data;
 
 public class CharacterGenerator : MonoBehaviour
 {
-    public Image image;
-    public Text text;
-    public Text statsText;
+    public GameObject[] slot = new GameObject[3];
 
     public List<Characters> characterList = new List<Characters>();
 
@@ -24,20 +22,31 @@ public class CharacterGenerator : MonoBehaviour
         }
     }
 
-    public void Generate3Character()
+    public void GenerateCharacters()
     {
-        Characters chara1 = NewCharacter();
+        int howManyCharacters = 3;
 
-        characterList.Add(chara1);
+        int[] choice = new int[howManyCharacters];
 
-        foreach (var chara in characterList)
+        for (int i = 0; i < howManyCharacters; i++)
         {
-            if (chara is Heroes h) //h ou Heroes h = chara as Heroes;
+            //to allow the 0 to exist as an index
+            //bc we check if different than the value in choice[i] 
+            choice[i] = -1;
+
+            //index
+            int randomChoice = Random.Range(0, 6);
+
+            // Choose a number from the Random.Range above and if already
+            // choosed during the loop changes it until a new number appears
+            choice[i] = Util.Instance.NewNumber(choice, i, randomChoice, 0, 6);
+
+            Characters newChara = NewCharacter(choice[i]);
+
+            characterList.Add(newChara);
+
+            if (newChara is Heroes h) //h ou Heroes h = chara as Heroes;
             {
-                Debug.Log(h.characterClass);
-
-                //h.sprite = charaSprite[0];
-
                 switch (h.characterClass)
                 {
                     case HeroClass.Paladin:
@@ -53,19 +62,15 @@ public class CharacterGenerator : MonoBehaviour
                         break;
                 }
 
-                image.sprite = h.sprite;
+                slot[i].transform.GetChild(1).GetComponentInChildren<Image>().sprite = h.sprite;
 
-                text.text = h.name;
+                slot[i].transform.GetChild(3).GetComponentInChildren<Text>().text = h.name;
 
-                statsText.text = GetDisplayStatsFromChara(h);
+                slot[i].transform.GetChild(4).GetComponentInChildren<Text>().text = GetDisplayStatsFromChara(h);
 
             }
-            if (chara is Enemy e) //h ou Heroes h = chara as Heroes;
+            if (newChara is Enemy e) //e ou Enemy e = chara as Enemy;
             {
-                Debug.Log(e.enemyClass);
-
-                //h.sprite = charaSprite[0];
-
                 switch (e.enemyClass)
                 {
                     case EnemyClass.Troll:
@@ -81,32 +86,63 @@ public class CharacterGenerator : MonoBehaviour
                         break;
                 }
 
-                image.sprite = e.sprite;
+                slot[i].transform.GetChild(1).GetComponentInChildren<Image>().sprite = e.sprite;
 
-                text.text = e.name;
+                slot[i].transform.GetChild(3).GetComponentInChildren<Text>().text = e.name;
 
-                statsText.text = GetDisplayStatsFromChara(e);
+                slot[i].transform.GetChild(4).GetComponentInChildren<Text>().text = GetDisplayStatsFromChara(e);
 
             }
         }
+/*
+        foreach (var chara in characterList)
+        {
+            if (chara is Heroes h) //h ou Heroes h = chara as Heroes;
+            {
+                switch (h.characterClass)
+                {
+                    case HeroClass.Paladin:
+                        h.sprite = Skin[HeroClass.Paladin.ToString()];
+                        break;
+                    case HeroClass.Assassin:
+                        h.sprite = Skin[HeroClass.Assassin.ToString()];
+                        break;
+                    case HeroClass.Archer:
+                        h.sprite = Skin[HeroClass.Archer.ToString()];
+                        break;
+                    default:
+                        break;
+                }
+
+                slot[0].transform.GetChild(1).GetComponentInChildren<Image>().sprite = h.sprite;
+
+                slot[0].transform.GetChild(3).GetComponentInChildren<Text>().text = h.name;
+
+                slot[0].transform.GetChild(4).GetComponentInChildren<Text>().text = GetDisplayStatsFromChara(h);
+
+            }
+        }*/
     }
 
-    public Characters NewCharacter()
+    public Characters NewCharacter(int charaChoice)
     {
         Characters chara = null;
 
-        int chooseHeroOrEnemy = Random.Range(1, 3);
+        //int chooseHeroOrEnemy = Random.Range(1, 3);
 
-        if (chooseHeroOrEnemy == 1)
+        Debug.Log("NewCharacter");
+        Debug.Log(charaChoice);
+
+        if (charaChoice < 3)
         {
-            HeroClass heroClass = ChooseHeroClass();
+            HeroClass heroClass = (HeroClass)charaChoice;
 
             chara = new Heroes(heroClass, MakeAName(heroClass), Util.Instance.SetRandomStats(1, 99, 9),
             Random.Range(0, 1000)/*Armor*/, Random.Range(10, 1000)/*Mana*/, Random.Range(1, 100)/*Level*/);
         }
-        else if (chooseHeroOrEnemy == 2)
+        else if (charaChoice >= 3)
         {
-            EnemyClass enemyClass = ChooseEnemyClass();
+            EnemyClass enemyClass = (EnemyClass)charaChoice;
 
             chara = new Enemy(enemyClass, MakeAName(enemyClass), Util.Instance.SetRandomStats(1, 99, 9),
             Random.Range(0, 1000)/*Armor*/, Random.Range(10, 1000)/*Mana*/, Random.Range(1, 100)/*Level*/);
@@ -114,7 +150,7 @@ public class CharacterGenerator : MonoBehaviour
 
         return chara;
     }
-    public EnemyClass ChooseEnemyClass()
+    /*public EnemyClass ChooseEnemyClass()
     {
         EnemyClass e;
 
@@ -133,7 +169,7 @@ public class CharacterGenerator : MonoBehaviour
         h = (HeroClass)randomHeroClass;
 
         return h;
-    }
+    }*/
 
     /*public string MakeAName(Characters classChara)
     {
@@ -234,9 +270,6 @@ public class CharacterGenerator : MonoBehaviour
         return stats;
     }
 
-    
-
-    
 
     // Update is called once per frame
     void Update()
