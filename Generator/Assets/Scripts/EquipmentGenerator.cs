@@ -196,19 +196,4 @@ public class EquipmentGenerator : MonoBehaviour
 
         return stats;
     }
-
-    public void OpenInventory()
-    {
-        inventoryWindow.SetActive(true);
-    }
-
-    public void CloseInventory()
-    {
-        inventoryWindow.SetActive(false);
-    }
-
-    public void InventoryEquipement()
-    {
-        Debug.Log("Vous avez choisi un equipement");
-    }
 }

@@ -36,7 +36,7 @@ public class Util : MonoBehaviour
             choice[i] = -1;
             int randomChoice = Random.Range(0, nbrStatsInGame);
 
-            choice[i] = NewNumber(choice, i, randomChoice);
+            choice[i] = NewNumber(choice, i, randomChoice, 0, 9);
 
             statsTab[choice[i]] = Random.Range(min, max + 1);
         }
@@ -47,7 +47,7 @@ public class Util : MonoBehaviour
         return statsRandom;
     }
 
-    public int NewNumber(int[] tab, int i, int random)
+    public int NewNumber(int[] tab, int i, int random, int newMin, int newMax)
     {
         int nbr = 0;
 
@@ -59,9 +59,9 @@ public class Util : MonoBehaviour
         }
         else
         {
-            random = Random.Range(0, 9);
+            random = Random.Range(newMin, newMax);
 
-            nbr = NewNumber(tab, i, random);
+            nbr = NewNumber(tab, i, random, newMin, newMax);
         }
 
         return nbr;
