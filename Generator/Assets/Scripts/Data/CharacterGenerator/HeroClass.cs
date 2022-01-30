@@ -7,8 +7,8 @@ namespace ExoProjetGénérateur.Data
 	[Serializable]
 	public enum HeroClass
 	{
-		Paladin,
-		Assassin,
-		Archer
+		Paladin = 0,
+		Assassin = 1,
+		Archer = 2,
 	}
 }

@@ -7,8 +7,8 @@ namespace ExoProjetGénérateur.Data
 	[Serializable]
 	public enum EnemyClass
 	{
-		Troll,
-		Goblin,
-		Lich
+		Troll = 3,
+		Goblin = 4,
+		Lich = 5,
 	}
 }
