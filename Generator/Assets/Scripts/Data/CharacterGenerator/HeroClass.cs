@@ -4,10 +4,11 @@ using System.Text;
 
 namespace ExoProjetGénérateur.Data
 {
-	public enum CharacterClass
+	[Serializable]
+	public enum HeroClass
 	{
 		Paladin,
-		Thief,
+		Assassin,
 		Archer
 	}
 }

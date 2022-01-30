@@ -4,10 +4,11 @@ using System.Text;
 
 namespace ExoProjetGénérateur.Data
 {
+	[Serializable]
 	public enum EnemyClass
 	{
 		Troll,
 		Goblin,
-		Skeleton
+		Lich
 	}
 }
