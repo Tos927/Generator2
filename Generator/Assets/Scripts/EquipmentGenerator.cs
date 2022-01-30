@@ -41,13 +41,13 @@ public class EquipmentGenerator : MonoBehaviour
 
     public void GenerateEquipment()
     {
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < 3; i++)
         {
             int rdmEquipmentType = Random.Range(0, 6);
             int rdmEquipmentAdj = Random.Range(0, 11);
             int levelNeaded = Random.Range(1, 100);
             int attackPoint = levelNeaded * 10;
-
+            
             if (rdmEquipmentType < 3)
             {
                 int rdmRange = Random.Range(0, 3);
@@ -66,7 +66,6 @@ public class EquipmentGenerator : MonoBehaviour
                         break;
                 }
             }
-
             switch (rdmEquipmentType)
             {
                 case 0:
@@ -97,7 +96,7 @@ public class EquipmentGenerator : MonoBehaviour
                     break;
             }
 
-            if (rdmEquipmentType == 0 || rdmEquipmentType == 1 || rdmEquipmentType == 2 )
+            if (rdmEquipmentType == 0 || rdmEquipmentType == 1 || rdmEquipmentType == 2)
             {
                 Equipments newEquipment = new Offensive(equipmentAdj[rdmEquipmentAdj], Util.Instance.SetRandomStats(1, 10, 3), damageBlock, levelNeaded,
                     equipementType, attackPoint, /*CriticalChance*/Random.Range(100, 600), /*CriticalDamage*/Random.Range(100, 600), equipmentRange);
@@ -152,6 +151,7 @@ public class EquipmentGenerator : MonoBehaviour
             statsText.text = GetDisplayStatsFromEquip(equipments);
         }
     }
+
     public string GetDisplayStatsFromEquip (Equipments e)
     {
         string stats =
