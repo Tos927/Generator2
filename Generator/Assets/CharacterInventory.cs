@@ -6,18 +6,14 @@ using ExoProjetGénérateur.Data;
 
 public class CharacterInventory : MonoBehaviour
 {
-    [SerializeField]
-    private CharacterGenerator characterGenerator;
+    public List<Characters> charactersCreated = new List<Characters>();
 
-    [SerializeField]
-    private GameObject leftArrow;
-    [SerializeField]
-    private GameObject rightArrow;
+    public CharacterGenerator characterGenerator;
 
-    [SerializeField]
-    private Text displayIndex;
+    public GameObject leftArrow;
+    public GameObject rightArrow;
 
-    private int index = 0;
+    public int index = 0;
 
     private static CharacterInventory _instance = null;
     public static CharacterInventory Instance
@@ -65,8 +61,6 @@ public class CharacterInventory : MonoBehaviour
         {
             rightArrow.SetActive(true);
         }
-
-        displayIndex.text = (index+1).ToString() + " / " + (characterGenerator.characterList.Count) /* + " / " + characterGenerator.characterList.Count.ToString*/;
     }
 
     public void ChangeIndex(bool up)

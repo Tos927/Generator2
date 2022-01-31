@@ -96,7 +96,7 @@ public class EquipmentGenerator : MonoBehaviour
                 Util.Instance.DisplayTheGeneration<Equipments>(slotEquip, i, 2, 3, 4, newEquip, null, newEquip.GetDisplayStatsFromEquip);
             }
 
-            inventory.CreateItem(newEquip);
+            //inventory.CreateItem(newEquip);
         }
     }
 
