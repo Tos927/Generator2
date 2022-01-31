@@ -10,11 +10,11 @@ namespace ExoProjetGénérateur.Data
 	{
 		public HeroClass characterClass;
 
-		public Heroes(HeroClass _characterClass, string _name, Stats stats, int _armor, int _mana, int _level)
+		public Heroes(HeroClass _characterClass, Stats stats, int _armor, int _mana, int _level)
 		{
 			this.characterClass = _characterClass;
 
-			this.name = _name;
+			this.name = _characterClass.ToString();
 			this.stats = stats;
 			this.life = stats.vitality * 100;
 			this.armor = _armor;

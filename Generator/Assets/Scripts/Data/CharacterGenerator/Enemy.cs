@@ -9,11 +9,11 @@ namespace ExoProjetGénérateur.Data
 	{
 		public EnemyClass enemyClass;
 
-		public Enemy(EnemyClass _enemyClass, string _name, Stats stats, int _armor, int _mana, int _level)
+		public Enemy(EnemyClass _enemyClass, Stats stats, int _armor, int _mana, int _level)
 		{
 			this.enemyClass = _enemyClass;
 
-			this.name = _name;
+			this.name = _enemyClass.ToString();
 			this.stats = stats;
 			this.life = stats.vitality * 100;
 			this.armor = _armor;

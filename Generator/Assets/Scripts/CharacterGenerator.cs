@@ -20,6 +20,35 @@ public class CharacterGenerator : MonoBehaviour
         {
             Skin.Add(sprite.name, sprite);
         }
+
+        /*
+        foreach (var chara in characterList)
+        {
+            if (chara is Heroes h) //h ou Heroes h = chara as Heroes;
+            {
+                switch (h.characterClass)
+                {
+                    case HeroClass.Paladin:
+                        h.sprite = Skin[HeroClass.Paladin.ToString()];
+                        break;
+                    case HeroClass.Assassin:
+                        h.sprite = Skin[HeroClass.Assassin.ToString()];
+                        break;
+                    case HeroClass.Archer:
+                        h.sprite = Skin[HeroClass.Archer.ToString()];
+                        break;
+                    default:
+                        break;
+                }
+
+                slot[0].transform.GetChild(1).GetComponentInChildren<Image>().sprite = h.sprite;
+
+                slot[0].transform.GetChild(3).GetComponentInChildren<Text>().text = h.name;
+
+                slot[0].transform.GetChild(4).GetComponentInChildren<Text>().text = GetDisplayStatsFromChara(h);
+
+            }
+        }*/
     }
 
     public void GenerateCharacters()
@@ -62,11 +91,14 @@ public class CharacterGenerator : MonoBehaviour
                         break;
                 }
 
-                slot[i].transform.GetChild(1).GetComponentInChildren<Image>().sprite = h.sprite;
+                Util.Instance.DisplayTheGeneration<Characters>(slot, i, 1, 3, 4, newChara, GetDisplayStatsFromChara);
+
+                //I keep that in case the function above doesn't work anymore or bug
+                /*slot[i].transform.GetChild(1).GetComponentInChildren<Image>().sprite = h.sprite;
 
                 slot[i].transform.GetChild(3).GetComponentInChildren<Text>().text = h.name;
 
-                slot[i].transform.GetChild(4).GetComponentInChildren<Text>().text = GetDisplayStatsFromChara(h);
+                slot[i].transform.GetChild(4).GetComponentInChildren<Text>().text = GetDisplayStatsFromChara(h);*/
 
             }
             if (newChara is Enemy e) //e ou Enemy e = chara as Enemy;
@@ -86,129 +118,48 @@ public class CharacterGenerator : MonoBehaviour
                         break;
                 }
 
-                slot[i].transform.GetChild(1).GetComponentInChildren<Image>().sprite = e.sprite;
-
-                slot[i].transform.GetChild(3).GetComponentInChildren<Text>().text = e.name;
-
-                slot[i].transform.GetChild(4).GetComponentInChildren<Text>().text = GetDisplayStatsFromChara(e);
-
+                Util.Instance.DisplayTheGeneration<Characters>(slot, i, 1, 3, 4, newChara, GetDisplayStatsFromChara);
             }
         }
-/*
-        foreach (var chara in characterList)
-        {
-            if (chara is Heroes h) //h ou Heroes h = chara as Heroes;
-            {
-                switch (h.characterClass)
-                {
-                    case HeroClass.Paladin:
-                        h.sprite = Skin[HeroClass.Paladin.ToString()];
-                        break;
-                    case HeroClass.Assassin:
-                        h.sprite = Skin[HeroClass.Assassin.ToString()];
-                        break;
-                    case HeroClass.Archer:
-                        h.sprite = Skin[HeroClass.Archer.ToString()];
-                        break;
-                    default:
-                        break;
-                }
-
-                slot[0].transform.GetChild(1).GetComponentInChildren<Image>().sprite = h.sprite;
-
-                slot[0].transform.GetChild(3).GetComponentInChildren<Text>().text = h.name;
-
-                slot[0].transform.GetChild(4).GetComponentInChildren<Text>().text = GetDisplayStatsFromChara(h);
-
-            }
-        }*/
     }
+
+    
 
     public Characters NewCharacter(int charaChoice)
     {
         Characters chara = null;
 
-        //int chooseHeroOrEnemy = Random.Range(1, 3);
-
-        Debug.Log("NewCharacter");
-        Debug.Log(charaChoice);
-
         if (charaChoice < 3)
         {
             HeroClass heroClass = (HeroClass)charaChoice;
 
-            chara = new Heroes(heroClass, MakeAName(heroClass), Util.Instance.SetRandomStats(1, 99, 9),
+            chara = new Heroes(heroClass, Util.Instance.SetRandomStats(1, 99, 9),
             Random.Range(0, 1000)/*Armor*/, Random.Range(10, 1000)/*Mana*/, Random.Range(1, 100)/*Level*/);
+
+            //Override the default name
+            chara.name = MakeANameForChara(chara);
         }
         else if (charaChoice >= 3)
         {
             EnemyClass enemyClass = (EnemyClass)charaChoice;
 
-            chara = new Enemy(enemyClass, MakeAName(enemyClass), Util.Instance.SetRandomStats(1, 99, 9),
+            chara = new Enemy(enemyClass, Util.Instance.SetRandomStats(1, 99, 9),
             Random.Range(0, 1000)/*Armor*/, Random.Range(10, 1000)/*Mana*/, Random.Range(1, 100)/*Level*/);
+
+            //Override the default name
+            chara.name = MakeANameForChara(chara);
         }
 
         return chara;
     }
-    /*public EnemyClass ChooseEnemyClass()
-    {
-        EnemyClass e;
 
-        int randomEnemyClass = Random.Range(0, 3);
-
-        e = (EnemyClass)randomEnemyClass;
-
-        return e;
-    }
-    public HeroClass ChooseHeroClass()
-    {
-        HeroClass h;
-
-        int randomHeroClass = Random.Range(0, 3);
-
-        h = (HeroClass)randomHeroClass;
-
-        return h;
-    }*/
-
-    /*public string MakeAName(Characters classChara)
-    {
-        //Heroes h = heroclass as Heroes;
-
-        if(classChara is Heroes h)
-        {
-            switch (HeroClass)
-            {
-                case HeroClass.Paladin:
-                    name = "Uther the " + HeroClass.Paladin.ToString();
-                    break;
-                case HeroClass.Thief:
-                    name = "Rogue the " + HeroClass.Thief.ToString();
-                    break;
-                case HeroClass.Archer:
-                    name = "Legolas the " + HeroClass.Archer.ToString();
-                    break;
-                default:
-                    break;
-            }
-        }
-        else if(classChara is Enemy e)
-        {
-
-        }
-
-        string name = "";
-
-        
-
-
-        return name;
-    }*/
-    public string MakeAName(HeroClass heroclass)
+    private string MakeANameForChara(Characters classChara)
     {
         string name = "";
 
-        switch (heroclass)
+        if (classChara is Heroes h)
+        {
+            switch (h.characterClass)
             {
                 case HeroClass.Paladin:
                     name = "Uther the Holy " + HeroClass.Paladin.ToString();
@@ -222,33 +173,29 @@ public class CharacterGenerator : MonoBehaviour
                 default:
                     break;
             }
-        
-        return name;
-    }
-
-    public string MakeAName(EnemyClass enemyclass)
-    {
-        string name = "";
-
-        switch (enemyclass)
+        }
+        else if (classChara is Enemy e)
         {
-            case EnemyClass.Troll:
-                name = EnemyClass.Troll.ToString() + " Warlord Zul'Jin";
-                break;
-            case EnemyClass.Goblin:
-                name = "Jastor Gallywix Prince " + EnemyClass.Goblin.ToString();
-                break;
-            case EnemyClass.Lich:
-                name = "The " + EnemyClass.Lich.ToString() + " King";
-                break;
-            default:
-                break;
+            switch (e.enemyClass)
+            {
+                case EnemyClass.Troll:
+                    name = EnemyClass.Troll.ToString() + " Warlord Zul'Jin";
+                    break;
+                case EnemyClass.Goblin:
+                    name = "Jastor Gallywix Prince " + EnemyClass.Goblin.ToString();
+                    break;
+                case EnemyClass.Lich:
+                    name = "The " + EnemyClass.Lich.ToString() + " King";
+                    break;
+                default:
+                    break;
+            }
         }
 
         return name;
     }
 
-    public string GetDisplayStatsFromChara(Characters h)
+    private string GetDisplayStatsFromChara(Characters h)
     {
         string stats =
 
@@ -268,12 +215,5 @@ public class CharacterGenerator : MonoBehaviour
             "Luck : " + h.stats.luck + "\n";
 
         return stats;
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

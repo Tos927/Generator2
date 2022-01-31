@@ -7,28 +7,18 @@ using System.Reflection;
 
 public class EquipmentGenerator : MonoBehaviour
 {
-    //Fenetre inventaire
-    public GameObject inventoryWindow;
-
     private Range equipmentRange;
     private EquipementType equipementType;
 
-    public Image image;
-    public Text statsText;
-    public Text nameText;
-    public Image image1;
-    public Text statsText1;
-    public Text nameText1;
-    public Image image2;
-    public Text statsText2;
-    public Text nameText2;
+    public GameObject[] slotEquip = new GameObject[3];
 
     public List<Equipments> equipmentsList = new List<Equipments>();
 
     public List<Sprite> equipmentSprite = new List<Sprite>();
 
-    private List<string> equipmentAdj = new List<string>(){ "Holy", "Titanic", "Marvelous", "Forcefull", "Mythril", 
-        "Obsidian", "Diamond", "Demonic", "God's", "Hercules's", "Lucifer's" };
+    //Put a space after the adjective
+    private List<string> equipmentAdj = new List<string>(){ "Holy ", "Titanic ", "Marvelous ", "Forcefull ", "Mythril ", 
+        "Obsidian ", "Diamond ", "Demonic ", "God's ", "Hercules's ", "Lucifer's " };
 
     public Dictionary<string, Sprite> Skin = new Dictionary<string, Sprite>();
 
@@ -44,78 +34,28 @@ public class EquipmentGenerator : MonoBehaviour
 
     public void GenerateEquipment()
     {
-        for (int i = 0; i < 1; i++)
-        {
-            int rdmEquipmentType = Random.Range(0, 6);
-            int rdmEquipmentAdj = Random.Range(0, 11);
-            int levelNeaded = Random.Range(1, 100);
-            int attackPoint = levelNeaded * 10;
-            
-            if (rdmEquipmentType < 3)
-            {
-                int rdmRange = Random.Range(0, 3);
-                switch (rdmRange)
-                {
-                    case 0:
-                        equipmentRange = Range.Short;
-                        break;
-                    case 1:
-                        equipmentRange = Range.Medium;
-                        break;
-                    case 2:
-                        equipmentRange = Range.Long;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            switch (rdmEquipmentType)
-            {
-                case 0:
-                    equipementType = EquipementType.Sword;
-                    damageBlock = Random.Range(10, 70);
-                    break;
-                case 1:
-                    equipementType = EquipementType.Bow;
-                    damageBlock = Random.Range(1, 20);
-                    break;
-                case 2:
-                    equipementType = EquipementType.MagicStaff;
-                    damageBlock = Random.Range(1, 30);
-                    break;
-                case 3:
-                    equipementType = EquipementType.Shield;
-                    damageBlock = Random.Range(30, 100);
-                    break;
-                case 4:
-                    equipementType = EquipementType.Armor;
-                    damageBlock = Random.Range(5, 30);
-                    break;
-                case 5:
-                    equipementType = EquipementType.Claymore;
-                    damageBlock = 0;
-                    break;
-                default:
-                    break;
-            }
+        int howManyEquipement = 3;
 
-            if (rdmEquipmentType == 0 || rdmEquipmentType == 1 || rdmEquipmentType == 2)
-            {
-                Equipments newEquipment = new Offensive(equipmentAdj[rdmEquipmentAdj], Util.Instance.SetRandomStats(1, 10, 3), damageBlock, levelNeaded,
-                    equipementType, attackPoint, /*CriticalChance*/Random.Range(100, 600), /*CriticalDamage*/Random.Range(100, 600), equipmentRange);
-                equipmentsList.Add(newEquipment);
-            }
-            else if (rdmEquipmentType == 3 || rdmEquipmentType == 4 || rdmEquipmentType == 5)
-            {
-                Equipments newEquipment = new Defensive(equipmentAdj[rdmEquipmentAdj], Util.Instance.SetRandomStats(1, 10, 3),
-                    damageBlock, levelNeaded, equipementType, /*Magicalarmor*/Random.Range(100, 600),/*Physicalarmor*/ Random.Range(100, 600));
-                equipmentsList.Add(newEquipment);
-            }
-        }
+        int[] choice = new int[howManyEquipement];
 
-        foreach (var equipments in equipmentsList)
+        for (int i = 0; i < howManyEquipement; i++)
         {
-            if (equipments is Offensive o)
+            //to allow the 0 to exist as an index
+            //bc we check if different than the value in choice[i] 
+            choice[i] = -1;
+
+            //index
+            int randomChoice = Random.Range(0, 6);
+
+            // Choose a number from the Random.Range above and if already
+            // choosed during the loop changes it until a new number appears
+            choice[i] = Util.Instance.NewNumber(choice, i, randomChoice, 0, 6);
+
+            Equipments newEquip = NewEquipement(choice[i]);
+
+            equipmentsList.Add(newEquip);
+
+            if (newEquip is Offensive o)
             {
                 switch (o.equipementType)
                 {
@@ -131,8 +71,10 @@ public class EquipmentGenerator : MonoBehaviour
                     default:
                         break;
                 }
+
+                Util.Instance.DisplayTheGeneration<Equipments>(slotEquip, i, 2, 3, 4, newEquip, null, GetDisplayStatsFromEquip);
             }
-            else if (equipments is Defensive d)
+            else if (newEquip is Defensive d)
             {
                 switch (d.equipementType)
                 {
@@ -148,11 +90,83 @@ public class EquipmentGenerator : MonoBehaviour
                     default:
                         break;
                 }
+
+                Util.Instance.DisplayTheGeneration<Equipments>(slotEquip, i, 2, 3, 4, newEquip, null, GetDisplayStatsFromEquip);
+
             }
-            image.sprite = equipments.sprite;
-            nameText.text = equipments.name + " " + equipementType.ToString();
-            statsText.text = GetDisplayStatsFromEquip(equipments);
         }
+    }
+
+    public Equipments NewEquipement(int equipChoice)
+    {
+        Equipments equip = null;
+
+        int rdmEquipmentAdj = Random.Range(0, equipmentAdj.Count);
+        int levelNeaded = Random.Range(1, 100);
+
+        if (equipChoice < 3)
+        {
+            int rdmRange = Random.Range(0, 3);
+            switch (rdmRange)
+            {
+                case 0:
+                    equipmentRange = Range.Short;
+                    break;
+                case 1:
+                    equipmentRange = Range.Medium;
+                    break;
+                case 2:
+                    equipmentRange = Range.Long;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        switch (equipChoice)
+        {
+            case 0:
+                equipementType = EquipementType.Sword;
+                damageBlock = Random.Range(10, 70);
+                break;
+            case 1:
+                equipementType = EquipementType.Bow;
+                damageBlock = Random.Range(1, 20);
+                break;
+            case 2:
+                equipementType = EquipementType.MagicStaff;
+                damageBlock = Random.Range(1, 30);
+                break;
+            case 3:
+                equipementType = EquipementType.Shield;
+                damageBlock = Random.Range(30, 100);
+                break;
+            case 4:
+                equipementType = EquipementType.Armor;
+                damageBlock = Random.Range(5, 30);
+                break;
+            case 5:
+                equipementType = EquipementType.Claymore;
+                damageBlock = 0;
+                break;
+            default:
+                break;
+        }
+
+        if (equipChoice < 3)
+        {
+            equip = new Offensive(equipmentAdj[rdmEquipmentAdj] + equipementType.ToString(), Util.Instance.SetRandomStats(1, 10, 3), 
+                damageBlock, levelNeaded, equipementType, /*AttackPoint*/levelNeaded * 10, /*CriticalChance*/Random.Range(100, 600),
+                /*CriticalDamage*/Random.Range(100, 600), equipmentRange);
+        }
+        else if (equipChoice >= 3)
+        {
+            equip = new Defensive(equipmentAdj[rdmEquipmentAdj] + equipementType.ToString(), Util.Instance.SetRandomStats(1, 10, 3),
+                    damageBlock, levelNeaded, equipementType, /*MagicalArmor*/Random.Range(100, 600),
+                    /*PhysicalArmor*/ Random.Range(100, 600));
+        }
+
+        return equip;
     }
 
     public string GetDisplayStatsFromEquip (Equipments e)
@@ -160,9 +174,7 @@ public class EquipmentGenerator : MonoBehaviour
         string stats =
 
             "Level Required : " + e.levelRequiered + "\n" +
-            "Damage Blocked : " + e.damageBlock + "\n\n";
-
-        
+            "Damage Blocked : " + e.damageBlock + " %\n\n";
 
         if (e is Offensive o)
         {

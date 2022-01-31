@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using ExoProjetGénérateur.Data;
 using System.Linq;
 
@@ -65,5 +66,26 @@ public class Util : MonoBehaviour
         }
 
         return nbr;
+    }
+
+    public void DisplayTheGeneration<T>(GameObject[] slot, int i, int child1, int child2, int child3, T myGeneration,
+        System.Func<Characters, string> myFunction, System.Func<Equipments, string> myFunction2 = null)
+    {
+        if (myGeneration is Characters c)
+        {
+            slot[i].transform.GetChild(child1).GetComponentInChildren<Image>().sprite = c.sprite;
+
+            slot[i].transform.GetChild(child2).GetComponentInChildren<Text>().text = c.name;
+
+            slot[i].transform.GetChild(child3).GetComponentInChildren<Text>().text = myFunction(c);
+        }
+        else if (myGeneration is Equipments e)
+        {
+            slot[i].transform.GetChild(child1).GetComponentInChildren<Image>().sprite = e.sprite;
+
+            slot[i].transform.GetChild(child2).GetComponentInChildren<Text>().text = e.name;
+
+            slot[i].transform.GetChild(child3).GetComponentInChildren<Text>().text = myFunction2(e);
+        }
     }
 }
