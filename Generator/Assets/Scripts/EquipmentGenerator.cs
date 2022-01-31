@@ -7,6 +7,8 @@ using System.Reflection;
 
 public class EquipmentGenerator : MonoBehaviour
 {
+    public Inventory inventory;
+
     private Range equipmentRange;
     private EquipementType equipementType;
 
@@ -20,7 +22,7 @@ public class EquipmentGenerator : MonoBehaviour
     private List<string> equipmentAdj = new List<string>(){ "Holy ", "Titanic ", "Marvelous ", "Forcefull ", "Mythril ", 
         "Obsidian ", "Diamond ", "Demonic ", "God's ", "Hercules's ", "Lucifer's " };
 
-    public Dictionary<string, Sprite> Skin = new Dictionary<string, Sprite>();
+    public Dictionary<string, Sprite> Skin { get; private set; } = new Dictionary<string, Sprite>();
 
     private int damageBlock; //en pourcentage
 
@@ -72,7 +74,7 @@ public class EquipmentGenerator : MonoBehaviour
                         break;
                 }
 
-                Util.Instance.DisplayTheGeneration<Equipments>(slotEquip, i, 2, 3, 4, newEquip, null, GetDisplayStatsFromEquip);
+                Util.Instance.DisplayTheGeneration<Equipments>(slotEquip, i, 2, 3, 4, newEquip, null, newEquip.GetDisplayStatsFromEquip);
             }
             else if (newEquip is Defensive d)
             {
@@ -91,9 +93,10 @@ public class EquipmentGenerator : MonoBehaviour
                         break;
                 }
 
-                Util.Instance.DisplayTheGeneration<Equipments>(slotEquip, i, 2, 3, 4, newEquip, null, GetDisplayStatsFromEquip);
-
+                Util.Instance.DisplayTheGeneration<Equipments>(slotEquip, i, 2, 3, 4, newEquip, null, newEquip.GetDisplayStatsFromEquip);
             }
+
+            //inventory.CreateItem(newEquip);
         }
     }
 

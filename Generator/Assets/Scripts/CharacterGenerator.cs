@@ -6,13 +6,20 @@ using ExoProjetGénérateur.Data;
 
 public class CharacterGenerator : MonoBehaviour
 {
-    public GameObject[] slot = new GameObject[3];
+    public Inventory inventory;
 
+    [SerializeField]
+    private GameObject[] slot = new GameObject[3];
+
+    //Stock the created Characters and is use in the inventory
     public List<Characters> characterList = new List<Characters>();
 
-    public List<Sprite> charaSprite = new List<Sprite>();
+    public bool listCharaIsEmpty = true;
 
-    public Dictionary<string, Sprite> Skin = new Dictionary<string, Sprite>();
+    [SerializeField]
+    private List<Sprite> charaSprite = new List<Sprite>();
+
+    public Dictionary<string, Sprite> Skin { get ; private set; } = new Dictionary<string, Sprite>();
 
     void Start()
     {
@@ -20,39 +27,15 @@ public class CharacterGenerator : MonoBehaviour
         {
             Skin.Add(sprite.name, sprite);
         }
-
-        /*
-        foreach (var chara in characterList)
-        {
-            if (chara is Heroes h) //h ou Heroes h = chara as Heroes;
-            {
-                switch (h.characterClass)
-                {
-                    case HeroClass.Paladin:
-                        h.sprite = Skin[HeroClass.Paladin.ToString()];
-                        break;
-                    case HeroClass.Assassin:
-                        h.sprite = Skin[HeroClass.Assassin.ToString()];
-                        break;
-                    case HeroClass.Archer:
-                        h.sprite = Skin[HeroClass.Archer.ToString()];
-                        break;
-                    default:
-                        break;
-                }
-
-                slot[0].transform.GetChild(1).GetComponentInChildren<Image>().sprite = h.sprite;
-
-                slot[0].transform.GetChild(3).GetComponentInChildren<Text>().text = h.name;
-
-                slot[0].transform.GetChild(4).GetComponentInChildren<Text>().text = GetDisplayStatsFromChara(h);
-
-            }
-        }*/
     }
 
     public void GenerateCharacters()
     {
+        if (listCharaIsEmpty)
+        {
+            listCharaIsEmpty = false;
+        }
+
         int howManyCharacters = 3;
 
         int[] choice = new int[howManyCharacters];
@@ -120,6 +103,8 @@ public class CharacterGenerator : MonoBehaviour
 
                 Util.Instance.DisplayTheGeneration<Characters>(slot, i, 1, 3, 4, newChara, GetDisplayStatsFromChara);
             }
+
+            //inventory.CreateCharacter(newChara);
         }
     }
 
@@ -133,8 +118,8 @@ public class CharacterGenerator : MonoBehaviour
         {
             HeroClass heroClass = (HeroClass)charaChoice;
 
-            chara = new Heroes(heroClass, Util.Instance.SetRandomStats(1, 99, 9),
-            Random.Range(0, 1000)/*Armor*/, Random.Range(10, 1000)/*Mana*/, Random.Range(1, 100)/*Level*/);
+            chara = new Heroes(Util.Instance.SetRandomStats(1, 99, 9), Random.Range(0, 1000)/*Armor*/,
+             Random.Range(10, 1000)/*Mana*/, Random.Range(1, 100)/*Level*/, heroClass);
 
             //Override the default name
             chara.name = MakeANameForChara(chara);
@@ -143,8 +128,8 @@ public class CharacterGenerator : MonoBehaviour
         {
             EnemyClass enemyClass = (EnemyClass)charaChoice;
 
-            chara = new Enemy(enemyClass, Util.Instance.SetRandomStats(1, 99, 9),
-            Random.Range(0, 1000)/*Armor*/, Random.Range(10, 1000)/*Mana*/, Random.Range(1, 100)/*Level*/);
+            chara = new Enemy(Util.Instance.SetRandomStats(1, 99, 9), Random.Range(0, 1000)/*Armor*/,
+             Random.Range(10, 1000)/*Mana*/, Random.Range(1, 100)/*Level*/, enemyClass);
 
             //Override the default name
             chara.name = MakeANameForChara(chara);
@@ -195,7 +180,7 @@ public class CharacterGenerator : MonoBehaviour
         return name;
     }
 
-    private string GetDisplayStatsFromChara(Characters h)
+    public string GetDisplayStatsFromChara(Characters h)
     {
         string stats =
 

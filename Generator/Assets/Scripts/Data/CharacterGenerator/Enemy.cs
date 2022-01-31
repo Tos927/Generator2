@@ -9,17 +9,9 @@ namespace ExoProjetGénérateur.Data
 	{
 		public EnemyClass enemyClass;
 
-		public Enemy(EnemyClass _enemyClass, Stats stats, int _armor, int _mana, int _level)
+		public Enemy(Stats stats, int _armor, int _mana, int _level, EnemyClass _enemyClass) : base(stats, _armor, _mana, _level)
 		{
 			this.enemyClass = _enemyClass;
-
-			this.name = _enemyClass.ToString();
-			this.stats = stats;
-			this.life = stats.vitality * 100;
-			this.armor = _armor;
-			this.stamina = stats.stamina * 100;
-			this.mana = (stats.intellect * 80) + (stats.memory * 20);
-			this.level = _level;
 		}
 	}
 }
