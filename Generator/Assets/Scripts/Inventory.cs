@@ -11,6 +11,8 @@ public class Inventory : MonoBehaviour
 
     [SerializeField]
     private EquipmentGenerator equipmentGenerator;
+    [SerializeField]
+    private CharacterGenerator characterGenerator;
 
     public void CreateItem(Equipments equipments)
     {
@@ -21,5 +23,11 @@ public class Inventory : MonoBehaviour
         a.transform.GetChild(1).GetComponentInChildren<Text>().text = equipments.name;
 
         a.transform.GetComponent<ItemSlot>().statsString = equipmentGenerator.GetDisplayStatsFromEquip(equipments);
+        a.transform.GetComponent<ItemSlot>().statsStringName = equipments.name;
+    }
+
+    public void CreateCharacter()
+    {
+
     }
 }

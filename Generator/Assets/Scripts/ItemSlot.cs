@@ -9,6 +9,7 @@ public class ItemSlot : MonoBehaviour
     public GameObject itemSlot;
     public GameObject itemStats;
 
+    public string statsStringName;
     public string statsString;
 
     [SerializeField]
@@ -28,6 +29,6 @@ public class ItemSlot : MonoBehaviour
 
     public void SetStats()
     {
-        itemStats.transform.GetChild(1).GetChild(0).GetComponentInChildren<Text>().text = statsString;
+        itemStats.transform.GetChild(1).GetChild(0).GetComponentInChildren<Text>().text = statsStringName + "\n\n" + statsString;
     }
 }
