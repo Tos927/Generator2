@@ -7,6 +7,9 @@ using System.Linq;
 
 public class Util : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject Inventory;
+
     private static Util _instance = null;
     public static Util Instance
     {
@@ -15,6 +18,8 @@ public class Util : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+
+        Inventory.SetActive(false); 
     }
 
     public Stats SetRandomStats(int min, int max, int howManyStats)
