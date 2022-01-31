@@ -16,7 +16,7 @@ public class EquipmentGenerator : MonoBehaviour
 
     public List<Sprite> equipmentSprite = new List<Sprite>();
 
-    public Inventory inventory;
+    public Inventory inventory; // a mettre chez kévin 
 
     //Put a space after the adjective
     private List<string> equipmentAdj = new List<string>(){ "Holy ", "Titanic ", "Marvelous ", "Forcefull ", "Mythril ", 
@@ -96,7 +96,7 @@ public class EquipmentGenerator : MonoBehaviour
                 Util.Instance.DisplayTheGeneration<Equipments>(slotEquip, i, 2, 3, 4, newEquip, null, GetDisplayStatsFromEquip);
             }
 
-            inventory.CreateItem(newEquip);
+            inventory.CreateItem(newEquip); // a mettre chez kévin
         }
     }
 

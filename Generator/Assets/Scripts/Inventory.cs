@@ -8,6 +8,7 @@ public class Inventory : MonoBehaviour
 {
     public GameObject itemStats;
     public GameObject item;
+    public GameObject character;
 
     [SerializeField]
     private EquipmentGenerator equipmentGenerator;
@@ -16,18 +17,26 @@ public class Inventory : MonoBehaviour
 
     public void CreateItem(Equipments equipments)
     {
-        GameObject a = Instantiate(item) as GameObject;
-        a.transform.SetParent(this.transform);
+        GameObject i = Instantiate(item) as GameObject;
+        i.transform.SetParent(this.transform);
 
-        a.transform.GetChild(0).GetComponentInChildren<Image>().sprite = equipments.sprite;
-        a.transform.GetChild(1).GetComponentInChildren<Text>().text = equipments.name;
+        i.transform.GetChild(0).GetComponentInChildren<Image>().sprite = equipments.sprite;
+        i.transform.GetChild(1).GetComponentInChildren<Text>().text = equipments.name;
 
-        a.transform.GetComponent<ItemSlot>().statsString = equipmentGenerator.GetDisplayStatsFromEquip(equipments);
-        a.transform.GetComponent<ItemSlot>().statsStringName = equipments.name;
+        i.transform.GetComponent<ItemSlot>().statsString = equipmentGenerator.GetDisplayStatsFromEquip(equipments);
+        i.transform.GetComponent<ItemSlot>().statsStringName = equipments.name;
     }
 
-    public void CreateCharacter()
+    public void CreateCharacter(Characters characters)
     {
+        GameObject c = Instantiate(character) as GameObject;
+        c.transform.SetParent(this.transform);
+
+        c.transform.GetChild(0).GetComponentInChildren<Image>().sprite = characters.sprite;
+        c.transform.GetChild(1).GetComponentInChildren<Text>().text = characters.name;
+
+        c.transform.GetComponent<CharacterSlot>().statsString = characterGenerator.GetDisplayStatsFromChara(characters);
+        c.transform.GetComponent<CharacterSlot>().statsStringName = characters.name;
 
     }
 }

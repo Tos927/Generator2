@@ -88,5 +88,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83cfd58d4b7c3ff49b89a44606db87bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemStats: {fileID: 4700683243481588644, guid: f3414eae4913c074d8e21204a621dec8, type: 3}
   item: {fileID: 1688779599602531310, guid: ed36195e13ecdcd46a6959d2263ce1e0, type: 3}
-  buttons: []
+  character: {fileID: 2465641850640385897, guid: e4e3c369775b27f428f65324f8370a8a, type: 3}
+  equipmentGenerator: {fileID: 0}
+  characterGenerator: {fileID: 0}

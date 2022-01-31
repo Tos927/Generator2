@@ -14,6 +14,8 @@ public class CharacterGenerator : MonoBehaviour
 
     public Dictionary<string, Sprite> Skin = new Dictionary<string, Sprite>();
 
+    public Inventory inventory; // a mettre chez kévin 
+
     void Start()
     {
         foreach (var sprite in charaSprite)
@@ -120,6 +122,7 @@ public class CharacterGenerator : MonoBehaviour
 
                 Util.Instance.DisplayTheGeneration<Characters>(slot, i, 1, 3, 4, newChara, GetDisplayStatsFromChara);
             }
+            inventory.CreateCharacter(newChara); // a mettre chez kévin
         }
     }
 
@@ -195,7 +198,7 @@ public class CharacterGenerator : MonoBehaviour
         return name;
     }
 
-    private string GetDisplayStatsFromChara(Characters h)
+    public string GetDisplayStatsFromChara(Characters h) //public a mettre chez kévin
     {
         string stats =
 
