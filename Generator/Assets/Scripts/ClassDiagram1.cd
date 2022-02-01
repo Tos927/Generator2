@@ -52,49 +52,49 @@
     </TypeIdentifier>
   </Class>
   <Class Name="CharacterGenerator">
-    <Position X="12" Y="0.5" Width="1.5" />
+    <Position X="12" Y="0.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>QAQABAAAACAAAIAABAEAgAAAAAAAAgACAACCAAQAAAA=</HashCode>
       <FileName>Assets\Scripts\CharacterGenerator.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="EquipmentGenerator">
-    <Position X="13.75" Y="0.5" Width="1.5" />
+    <Position X="15" Y="0.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>CgAlEAAgACBAAAAACAABABAAAAAAAAACAAAAAAwAAAA=</HashCode>
       <FileName>Assets\Scripts\EquipmentGenerator.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Inventory">
-    <Position X="15.5" Y="0.5" Width="1.5" />
+    <Position X="21" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AABIAAAAAAAAABAAAAQAAAAACAAAACQAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Inventory.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CharacterInventory">
-    <Position X="17.25" Y="0.5" Width="1.5" />
+    <Position X="23.5" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAQEAAAAAAAAEAAABAAAAAAAIQAAACAAQAEAAAABAEA=</HashCode>
       <FileName>Assets\Scripts\CharacterInventory.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ItemSlot">
-    <Position X="15.5" Y="4.25" Width="1.5" />
+    <Position X="21" Y="3.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAQACQCAAAAACAAEEA=</HashCode>
       <FileName>Assets\Scripts\ItemSlot.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Util">
-    <Position X="19" Y="0.5" Width="1.5" />
+    <Position X="18" Y="0.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAAAgAAAAAAAAACAAAAAAAAQAAAAgAAEEA=</HashCode>
       <FileName>Assets\Scripts\Util.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CharacterSlot">
-    <Position X="17.25" Y="4.25" Width="1.5" />
+    <Position X="23.5" Y="4.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAABACQCAAAAACAAEEA=</HashCode>
       <FileName>Assets\Scripts\CharacterSlot.cs</FileName>
