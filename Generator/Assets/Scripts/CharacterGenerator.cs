@@ -4,37 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 using ExoProjetGénérateur.Data;
 
-public class CharacterGenerator : MonoBehaviour
+public class CharacterGenerator : GeneratorManager
 {
-    public Inventory inventory;
-
-    public int howManyCharacters = 3;
-
-    [SerializeField]
-    private GameObject[] slot = new GameObject[3];
-
     //Stock the created Characters and is use in the inventory
     public List<Characters> characterList = new List<Characters>();
 
     public bool listCharaIsEmpty = true;
 
-    [SerializeField]
-    private List<Sprite> charaSprite = new List<Sprite>();
-
-    public Dictionary<string, Sprite> Skin { get ; private set; } = new Dictionary<string, Sprite>();
-
-    void Start()
+    protected override void Start()
     {
-        foreach (var sprite in charaSprite)
-        {
-            Skin.Add(sprite.name, sprite);
-        }
+        base.Start();
     }
 
-    public int howManyCharactersGetSet
+    public int howManyGenerationGetSet
     {
-        get { return howManyCharacters; }
-        set { howManyCharacters = value; } 
+        get { return howManyGeneration; }
+        set { howManyGeneration = value; } 
     }
 
     public void GenerateCharacters()
@@ -44,9 +29,9 @@ public class CharacterGenerator : MonoBehaviour
             listCharaIsEmpty = false;
         }
 
-        int[] choice = new int[howManyCharacters];
+        int[] choice = new int[howManyGeneration];
 
-        for (int i = 0; i < howManyCharacters; i++)
+        for (int i = 0; i < howManyGeneration; i++)
         {
             //to allow the 0 to exist as an index
             //bc we check if different than the value in choice[i] 

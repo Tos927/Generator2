@@ -5,48 +5,36 @@ using UnityEngine.UI;
 using ExoProjetGénérateur.Data;
 using System.Reflection;
 
-public class EquipmentGenerator : MonoBehaviour
+public class EquipmentGenerator : GeneratorManager
 {
-    public Inventory inventory;
-
-    int howManyEquipement = 3;
-
     private Range equipmentRange;
     private EquipementType equipementType;
 
-    public GameObject[] slotEquip = new GameObject[3];
-
     public List<Equipments> equipmentsList = new List<Equipments>();
-
-    public List<Sprite> equipmentSprite = new List<Sprite>();
 
     //Put a space after the adjective
     private List<string> equipmentAdj = new List<string>(){ "Holy ", "Titanic ", "Marvelous ", "Forcefull ", "Mythril ", 
         "Obsidian ", "Diamond ", "Demonic ", "God's ", "Hercules's ", "Lucifer's " };
 
-    public Dictionary<string, Sprite> Skin { get; private set; } = new Dictionary<string, Sprite>();
-
     private int damageBlock; //en pourcentage
 
-    private void Start()
+    protected override void Start()
     {
-        foreach (var sprite in equipmentSprite)
-        {
-            Skin.Add(sprite.name, sprite);
-        }
+        base.Start();
     }
-    public int howManyEquipementGetSet
+
+    public int howManyGenerationGetSet
     {
-        get { return howManyEquipement; }
-        set { howManyEquipement = value; }
+        get { return howManyGeneration; }
+        set { howManyGeneration = value; }
     }
 
     public void GenerateEquipment()
     {
 
-        int[] choice = new int[howManyEquipement];
+        int[] choice = new int[howManyGeneration];
 
-        for (int i = 0; i < howManyEquipement; i++)
+        for (int i = 0; i < howManyGeneration; i++)
         {
             //to allow the 0 to exist as an index
             //bc we check if different than the value in choice[i] 
@@ -80,7 +68,7 @@ public class EquipmentGenerator : MonoBehaviour
                         break;
                 }
 
-                Util.Instance.DisplayTheGeneration<Equipments>(slotEquip, i, 2, 3, 4, newEquip, null, newEquip.GetDisplayStatsFromEquip);
+                Util.Instance.DisplayTheGeneration<Equipments>(slot, i, 2, 3, 4, newEquip, null, newEquip.GetDisplayStatsFromEquip);
             }
             else if (newEquip is Defensive d)
             {
@@ -99,7 +87,7 @@ public class EquipmentGenerator : MonoBehaviour
                         break;
                 }
 
-                Util.Instance.DisplayTheGeneration<Equipments>(slotEquip, i, 2, 3, 4, newEquip, null, newEquip.GetDisplayStatsFromEquip);
+                Util.Instance.DisplayTheGeneration<Equipments>(slot, i, 2, 3, 4, newEquip, null, newEquip.GetDisplayStatsFromEquip);
             }
 
             inventory.CreateItem(newEquip);
