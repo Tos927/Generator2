@@ -8,6 +8,8 @@ public class CharacterGenerator : MonoBehaviour
 {
     public Inventory inventory;
 
+    public int howManyCharacters = 3;
+
     [SerializeField]
     private GameObject[] slot = new GameObject[3];
 
@@ -29,14 +31,18 @@ public class CharacterGenerator : MonoBehaviour
         }
     }
 
+    public int howManyCharactersGetSet
+    {
+        get { return howManyCharacters; }
+        set { howManyCharacters = value; } 
+    }
+
     public void GenerateCharacters()
     {
         if (listCharaIsEmpty)
         {
             listCharaIsEmpty = false;
         }
-
-        int howManyCharacters = 3;
 
         int[] choice = new int[howManyCharacters];
 

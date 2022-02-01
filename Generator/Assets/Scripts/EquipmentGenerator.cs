@@ -9,6 +9,8 @@ public class EquipmentGenerator : MonoBehaviour
 {
     public Inventory inventory;
 
+    int howManyEquipement = 3;
+
     private Range equipmentRange;
     private EquipementType equipementType;
 
@@ -33,10 +35,14 @@ public class EquipmentGenerator : MonoBehaviour
             Skin.Add(sprite.name, sprite);
         }
     }
+    public int howManyEquipementGetSet
+    {
+        get { return howManyEquipement; }
+        set { howManyEquipement = value; }
+    }
 
     public void GenerateEquipment()
     {
-        int howManyEquipement = 3;
 
         int[] choice = new int[howManyEquipement];
 
