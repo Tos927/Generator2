@@ -352,7 +352,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 892519895}
         m_TargetAssemblyTypeName: EquipmentGenerator, Assembly-CSharp
-        m_MethodName: set_howManyEquipementGetSet
+        m_MethodName: set_howManyGenerationGetSet
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1238,7 +1238,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 892519894}
         m_TargetAssemblyTypeName: CharacterGenerator, Assembly-CSharp
-        m_MethodName: set_howManyCharactersGetSet
+        m_MethodName: set_howManyGenerationGetSet
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1410,20 +1410,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 871279551}
-  howManyCharacters: 3
+  howManyGeneration: 3
   slot:
   - {fileID: 421224805}
   - {fileID: 2033939244}
   - {fileID: 1592621525}
+  sprite:
+  - {fileID: 21300000, guid: 4053263a9732d02479ce9305869e67ab, type: 3}
+  - {fileID: 21300000, guid: 7c32cb13801090d4b9b0dc323ff53156, type: 3}
+  - {fileID: 21300000, guid: c1e704131a1a24a4e8fe90bcf474e294, type: 3}
+  - {fileID: 21300000, guid: e52f8238891496c458d2cc45e7670dc6, type: 3}
+  - {fileID: 21300000, guid: 737db12352acc5440b53aa756aa991ea, type: 3}
+  - {fileID: 21300000, guid: fa06c935e9b27374ab7c6b798e548a8d, type: 3}
   characterList: []
   listCharaIsEmpty: 1
-  charaSprite:
-  - {fileID: 21300000, guid: 7c32cb13801090d4b9b0dc323ff53156, type: 3}
-  - {fileID: 21300000, guid: fa06c935e9b27374ab7c6b798e548a8d, type: 3}
-  - {fileID: 21300000, guid: 4053263a9732d02479ce9305869e67ab, type: 3}
-  - {fileID: 21300000, guid: 737db12352acc5440b53aa756aa991ea, type: 3}
-  - {fileID: 21300000, guid: e52f8238891496c458d2cc45e7670dc6, type: 3}
-  - {fileID: 21300000, guid: c1e704131a1a24a4e8fe90bcf474e294, type: 3}
 --- !u!114 &892519895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1437,18 +1437,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 871279551}
-  slotEquip:
+  howManyGeneration: 3
+  slot:
   - {fileID: 845318928}
   - {fileID: 1458641824}
   - {fileID: 306323778}
-  equipmentsList: []
-  equipmentSprite:
+  sprite:
   - {fileID: 21300000, guid: b4e4557b327bbc44c83a9f2f6e128390, type: 3}
   - {fileID: 21300000, guid: 361ec406368fbef40aa3ee8136d01d47, type: 3}
   - {fileID: 21300000, guid: 7947fcb6cd37dda4bbe4a822ce6cf865, type: 3}
   - {fileID: 21300000, guid: e4c004aeb124efe4a9117ecb9c7aafb5, type: 3}
   - {fileID: 21300000, guid: 839384cb47931904eb73a869f2789783, type: 3}
   - {fileID: 21300000, guid: 5a5d7304a12d9cf46a2d9349133fb488, type: 3}
+  equipmentsList: []
 --- !u!1 &1128677939
 GameObject:
   m_ObjectHideFlags: 0
@@ -2504,7 +2505,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 892519894}
         m_TargetAssemblyTypeName: CharacterGenerator, Assembly-CSharp
-        m_MethodName: set_howManyCharactersGetSet
+        m_MethodName: set_howManyGenerationGetSet
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2939,7 +2940,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 892519895}
         m_TargetAssemblyTypeName: EquipmentGenerator, Assembly-CSharp
-        m_MethodName: set_howManyEquipementGetSet
+        m_MethodName: set_howManyGenerationGetSet
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
