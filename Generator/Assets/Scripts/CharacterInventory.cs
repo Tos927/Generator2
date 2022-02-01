@@ -8,12 +8,18 @@ public class CharacterInventory : MonoBehaviour
 {
     public List<Characters> charactersCreated = new List<Characters>();
 
-    public CharacterGenerator characterGenerator;
+    [SerializeField]
+    private CharacterGenerator characterGenerator;
 
-    public GameObject leftArrow;
-    public GameObject rightArrow;
+    [SerializeField]
+    private GameObject leftArrow;
+    [SerializeField]
+    private GameObject rightArrow;
 
-    public int index = 0;
+    [SerializeField]
+    private Text displayIndex;
+
+    private int index = 0;
 
     private static CharacterInventory _instance = null;
     public static CharacterInventory Instance
@@ -52,14 +58,17 @@ public class CharacterInventory : MonoBehaviour
 
                 this.transform.GetChild(4).GetComponentInChildren<Text>().text = characterGenerator.GetDisplayStatsFromChara(characterGenerator.characterList[index]);
             }
-        }
-        if (index == (characterGenerator.characterList.Count - 1))
-        {
-            rightArrow.SetActive(false);
-        }
-        else
-        {
-            rightArrow.SetActive(true);
+
+            if (index == (characterGenerator.characterList.Count - 1))
+            {
+                rightArrow.SetActive(false);
+            }
+            else
+            {
+                rightArrow.SetActive(true);
+            }
+
+            displayIndex.text = (index + 1).ToString() + " / " + (characterGenerator.characterList.Count);
         }
     }
 
