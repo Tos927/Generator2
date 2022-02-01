@@ -35,8 +35,6 @@ public class CharacterInventory : MonoBehaviour
 
     public void Update()
     {
-        Debug.Log(characterGenerator.characterList.Count);
-
         if (!characterGenerator.listCharaIsEmpty)
         {
             if (this.transform.GetChild(1).GetComponentInChildren<Image>().sprite != characterGenerator.characterList[index].sprite
